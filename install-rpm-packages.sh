@@ -17,9 +17,6 @@ failed_download_packages=();
 declare -A packages;
 
 packages['google-chrome']='https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm';
-packages['firefox']='hello firefox';
-packages['postsman']='hello post';
-
 
 
 function check_failed_packages() {
