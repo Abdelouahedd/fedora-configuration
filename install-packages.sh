@@ -31,6 +31,12 @@ packages=(
     evince
     firefox
     nodejs
+    black
+    ShellCheck
+    nmap
+    wireshark
+    eog
+    simplescreenrecorder
 );
 
 failed_installs=();
