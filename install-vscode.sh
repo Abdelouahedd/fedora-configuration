@@ -4,7 +4,6 @@
 
 extensions=(
     adpyke.vscode-sql-formatter
-    alefragnani.Bookmarks
     Angular.ng-template
     CoenraadS.bracket-pair-colorizer
     dbaeumer.vscode-eslint
@@ -44,24 +43,26 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 
 # install vscode
 sudo dnf check-update;
-sudo dnf install -y code && {
-    
-    # Install extensions
-    for extension in "${extensions[@]}"; do
-        code --install-exntension "$extension" || {
-            failed_installs+=("$extension");
-        }
-    done;
-    
-    # Checked failed install
-    if [[ ${#failed_installs[@]} != 0 ]]; then
-        
-        echo "[-] Failed to install the follwoing extensions";
-        for extension in "${failed_installs[@]}"; do
-            echo "> $extension";
-        done
-        echo "[-] Failed to instal the extensions above";
-
-    fi;
-    
+sudo dnf install -y code || {
+    echo "[-] Failed to install Vscode"
+    exit 1;
 }
+
+# Install extensions
+for extension in "${extensions[@]}"; do
+    code --install-extension "$extension" || {
+        failed_installs+=("$extension");
+    }
+done;
+
+# Checked failed install
+if [[ ${#failed_installs[@]} != 0 ]]; then
+    
+    echo "[-] Failed to install the follwoing extensions";
+    for extension in "${failed_installs[@]}"; do
+        echo "> $extension";
+    done
+    echo "[-] Failed to instal the extensions above";
+
+fi;
+
